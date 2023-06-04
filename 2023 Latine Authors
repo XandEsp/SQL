@@ -1,0 +1,94 @@
+/* 2023 Latine Authors*/
+
+CREATE TABLE authors (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT,
+published_works INTEGER);
+
+CREATE TABLE books (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+title TEXT,
+author TEXT,
+release_month TEXT);
+
+CREATE TABLE genre (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+title TEXT,
+genre TEXT,
+classification TEXT);
+
+INSERT INTO authors (name, published_works) VALUES ("Tamika Burgess", 1);
+INSERT INTO authors (name, published_works) VALUES ("Ann Davila Cardinal", 8);
+INSERT INTO authors (name, published_works) VALUES ("Jose Olivarez", 3);
+INSERT INTO authors (name, published_works) VALUES ("Taylor Kay Mejia", 10);
+INSERT INTO authors (name, published_works) VALUES ("Amparo Ortiz", 8);
+INSERT INTO authors (name, published_works) VALUES ("Ari Tison", 3);
+INSERT INTO authors (name, published_works) VALUES ("Mark Oshiro", 20);
+INSERT INTO authors (name, published_works) VALUES ("Jonny Garza Villa", 3);
+INSERT INTO authors (name, published_works) VALUES ("Llana de la Rosa", 8);
+INSERT INTO authors (name, published_works) VALUES ("Lorraine Avila", 1);
+INSERT INTO authors (name, published_works) VALUES ("V Castro", 8);
+INSERT INTO authors (name, published_works) VALUES ("Margarita Engle", 32);
+INSERT INTO authors (name, published_works) VALUES ("Isabel Allende", 26);
+INSERT INTO authors (name, published_works) VALUES ("Silvia Moreno-Garcia", 15);
+INSERT INTO authors (name, published_works) VALUES ("Gabriela Romero LaCruz", 1);
+INSERT INTO authors (name, published_works) VALUES ("Elizabeth Acevedo", 7);
+INSERT INTO authors (name, published_works) VALUES ("Isabel Canas", 2);
+INSERT INTO authors (name, published_works) VALUES ("John Manuel Arias", 1);
+
+INSERT INTO books (title, author, release_month) VALUES ("Sincerely Sicily", "Tamika Burgess", "January");
+INSERT INTO books (title, author, release_month) VALUES ("Breakup From Hell", "Ann Davila Cardinal", "January");
+INSERT INTO books (title, author, release_month) VALUES ("Promises of God", "Jose Olivarez", "February");
+INSERT INTO books (title, author, release_month) VALUES ("Lucha of the Night Forest", "Taylor Kay Mejia", "March");
+INSERT INTO books (title, author, release_month) VALUES ("Last Sunrise in Eterna", "Amparo Ortiz", "March");
+INSERT INTO books (title, author, release_month) VALUES ("Saints of the Household", "Ari Tison", "March");
+INSERT INTO books (title, author, release_month) VALUES ("Into the Light", "Mark Oshiro", "March");
+INSERT INTO books (title, author, release_month) VALUES ("Ander & Santi Were Here", "Jonny Garza Villa", "April");
+INSERT INTO books (title, author, release_month) VALUES ("Ana Maria and the Fox", "Llana de la Rosa", "April");
+INSERT INTO books (title, author, release_month) VALUES ("The Making of Yolanda la Bruja", "Lorraine Avila", "April");
+INSERT INTO books (title, author, release_month) VALUES ("The Haunting of Alejandra", "V. Castro", "April");
+INSERT INTO books (title, author, release_month) VALUES ("Wings in the Wild", "Margarita Engle", "April");
+INSERT INTO books (title, author, release_month) VALUES ("The Wind Knows My Name", "Isabel Allende", "June");
+INSERT INTO books (title, author, release_month) VALUES ("Silver Nitrate", "Silvia Moreno-Garcia", "July");
+INSERT INTO books (title, author, release_month) VALUES ("The Sun and the Void", "Gabriela Romero LaCruz", "July");
+INSERT INTO books (title, author, release_month) VALUES ("Family Lore", "Elizabeth Acevedo", "August");
+INSERT INTO books (title, author, release_month) VALUES ("Vampires of el Norte", "Isabel Canas", "August");
+INSERT INTO books (title, author, release_month) VALUES ("Where There was Fire", "John Manuel Arias", "September");
+
+INSERT INTO genre (title, genre, classification) VALUES ("Sincerely Sicily", "Fiction", "Middle Grade");
+INSERT INTO genre (title, genre, classification) VALUES ("Breakup From Hell", "Romance", "Young Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("Promises of Gold", "Poetry", "Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("Lucha of the Night Forest", "Fantasy", "Young Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("Last Sunrise in Eterna", "Fantasy", "Young Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("Saints of the Household", "Fiction", "Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("Into the Light", "Thriller", "Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("Ander & Santi Were Here", "Romance", "Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("Ana Maria and the Fox", "Historical Fiction", "Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("The Making of Yolanda la Bruja", "Fiction", "Young Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("The Haunting of Alejandra", "Horror", "Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("Wings in the Wild", "Fiction", "Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("The Wind Knows My Name", "Historical Fiction", "Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("Silver Nitrate", "Thriller", "Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("The Sun and the Void", "Fantasy", "Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("Family Lore", "Fiction", "Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("Vampires of el Norte", "Thriller", "Adult");
+INSERT INTO genre (title, genre, classification) VALUES ("Where There was Fire", "Fiction", "Adult");
+
+SELECT a.name, b.title, g.genre, g.classification
+FROM authors a
+JOIN genre g
+ON a.id = g.id
+JOIN books b
+ON b.title = g.title;
+
+SELECT a.name AS "Debut Author", b.title
+FROM authors a
+JOIN books b
+ON a.id = b.id
+WHERE a.published_works IN (1);
+
+SELECT b.title AS "Tween/Teen Books", b.release_month
+FROM books b
+JOIN genre g
+ON b.id = g.id
+WHERE g.classification IN ("Middle Grade", "Young Adult");
