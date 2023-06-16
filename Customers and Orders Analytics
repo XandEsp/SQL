@@ -72,7 +72,15 @@ GROUP BY location
 HAVING COUNT(orderID) >2;
 
 /*2. How many of each type of headphone were sold in February?*/
-SELECT DISTINCT Product, COUNT(Quantity) AS TotalSold
+SELECT DISTINCT Product, SUM(Quantity) AS TotalSold
 FROM BIT_DB.FebSales
 WHERE Product LIKE "%headphone%"
 GROUP BY Product
+
+/*3. What was the average amount spent per account in February?*/
+SELECT SUM (Quantity*price)/COUNT(Cust.acctnum) AS Average_Spent
+FROM BIT_DB.FebSales Feb
+LEFT JOIN BIT_DB.customers Cust
+ON Feb.orderID = Cust.order_id
+WHERE length(orderid) = 6 
+AND orderid <> 'Order ID'
